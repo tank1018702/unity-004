@@ -170,88 +170,104 @@ namespace Voxel2Unity {
 		}
 
 
-		public static VoxData LoadVoxel (string path) {
+		public static VoxData LoadVoxel (string path)
+        {
 			return LoadVoxel(Util.FileToByte(path));
 		}
 
 
-		public static VoxData LoadVoxel (byte[] _data) {
+		public static VoxData LoadVoxel (byte[] _data)
+        {
 
-			if (_data[0] != 'V' || _data[1] != 'O' || _data[2] != 'X' || _data[3] != ' ') {
+			if (_data[0] != 'V' || _data[1] != 'O' || _data[2] != 'X' || _data[3] != ' ')
+            {
 				Debug.LogError("Error Magic Number");
 				return null;
 			}
 
-			using (MemoryStream _ms = new MemoryStream(_data)) {
+            using (MemoryStream _ms = new MemoryStream(_data))
+            {
 
-				using (BinaryReader _br = new BinaryReader(_ms)) {
+                using (BinaryReader _br = new BinaryReader(_ms))
+                {
 
-					VoxData _mainData = new VoxData();
-					List<int[,,]> tempVoxels = new List<int[,,]>();
-					List<Vector3> tempSizes = new List<Vector3>();
-					///*
+                    VoxData _mainData = new VoxData();
+                    List<int[,,]> tempVoxels = new List<int[,,]>();
+                    List<Vector3> tempSizes = new List<Vector3>();
+                    ///*
 
-					// VOX_
-					_br.ReadInt32();
+                    // VOX_
+                    _br.ReadInt32();
 
-					// VERSION
-					_mainData.Version = _br.ReadBytes(4);
+                    // VERSION
+                    _mainData.Version = _br.ReadBytes(4);
 
-					byte[] _chunkId = _br.ReadBytes(4);
-					if (_chunkId[0] != 'M' || _chunkId[1] != 'A' || _chunkId[2] != 'I' || _chunkId[3] != 'N') {
-						Debug.LogError("Error main ID");
-						return null;
-					}
+                    byte[] _chunkId = _br.ReadBytes(4);
+                    if (_chunkId[0] != 'M' || _chunkId[1] != 'A' || _chunkId[2] != 'I' || _chunkId[3] != 'N')
+                    {
+                        Debug.LogError("Error main ID");
+                        return null;
+                    }
 
-					int _chunkSize = _br.ReadInt32();
-					int _childrenSize = _br.ReadInt32();
+                    int _chunkSize = _br.ReadInt32();
+                    int _childrenSize = _br.ReadInt32();
 
-					_br.ReadBytes(_chunkSize);
+                    _br.ReadBytes(_chunkSize);
 
-					int _readSize = 0;
-					while (_readSize < _childrenSize) {
-						_chunkId = _br.ReadBytes(4);
-						if (_chunkId[0] == 'S' && _chunkId[1] == 'I' && _chunkId[2] == 'Z' && _chunkId[3] == 'E') {
+                    int _readSize = 0;
+                    while (_readSize < _childrenSize)
+                    {
+                        _chunkId = _br.ReadBytes(4);
+                        if (_chunkId[0] == 'S' && _chunkId[1] == 'I' && _chunkId[2] == 'Z' && _chunkId[3] == 'E')
+                        {
 
-							_readSize += ReadSizeChunk(_br, ref tempSizes);
+                            _readSize += ReadSizeChunk(_br, ref tempSizes);
 
-						} else if (_chunkId[0] == 'X' && _chunkId[1] == 'Y' && _chunkId[2] == 'Z' && _chunkId[3] == 'I') {
+                        }
+                        else if (_chunkId[0] == 'X' && _chunkId[1] == 'Y' && _chunkId[2] == 'Z' && _chunkId[3] == 'I')
+                        {
 
-							_readSize += ReadVoxelChunk(_br, _mainData, tempSizes, ref tempVoxels);
+                            _readSize += ReadVoxelChunk(_br, _mainData, tempSizes, ref tempVoxels);
 
-						} else if (_chunkId[0] == 'R' && _chunkId[1] == 'G' && _chunkId[2] == 'B' && _chunkId[3] == 'A') {
+                        }
+                        else if (_chunkId[0] == 'R' && _chunkId[1] == 'G' && _chunkId[2] == 'B' && _chunkId[3] == 'A')
+                        {
 
-							_mainData.Palatte = new Color[256];
-							_readSize += ReadPalattee(_br, _mainData.Palatte);
+                            _mainData.Palatte = new Color[256];
+                            _readSize += ReadPalattee(_br, _mainData.Palatte);
 
-						} else {
-							int chunkSize = _br.ReadInt32();
-							int childrenSize = _br.ReadInt32();
-							_br.ReadBytes(chunkSize + childrenSize);
-							_readSize += chunkSize + childrenSize + 4 + 4 + 4;
-						}
-					}
+                        }
+                        else
+                        {
+                            int chunkSize = _br.ReadInt32();
+                            int childrenSize = _br.ReadInt32();
+                            _br.ReadBytes(chunkSize + childrenSize);
+                            _readSize += chunkSize + childrenSize + 4 + 4 + 4;
+                        }
+                    }
 
-					// Add Voxels
-					_mainData.Voxels = tempVoxels.ToArray();
+                    // Add Voxels
+                    _mainData.Voxels = tempVoxels.ToArray();
 
-					// Add Sizes
-					_mainData.SizeX = new int[tempSizes.Count];
-					_mainData.SizeY = new int[tempSizes.Count];
-					_mainData.SizeZ = new int[tempSizes.Count];
-					for (int i = 0; i < tempSizes.Count; i++) {
-						_mainData.SizeX[i] = (int)tempSizes[i].x;
-						_mainData.SizeY[i] = (int)tempSizes[i].y;
-						_mainData.SizeZ[i] = (int)tempSizes[i].z;
-					}
+                    // Add Sizes
+                    _mainData.SizeX = new int[tempSizes.Count];
+                    _mainData.SizeY = new int[tempSizes.Count];
+                    _mainData.SizeZ = new int[tempSizes.Count];
+                    for (int i = 0; i < tempSizes.Count; i++)
+                    {
+                        _mainData.SizeX[i] = (int)tempSizes[i].x;
+                        _mainData.SizeY[i] = (int)tempSizes[i].y;
+                        _mainData.SizeZ[i] = (int)tempSizes[i].z;
+                    }
 
-					if (_mainData.Palatte == null) {
-						_mainData.Palatte = DefaultPallete;
-					}
+                    if (_mainData.Palatte == null)
+                    {
+                        _mainData.Palatte = DefaultPallete;
+                    }
 
-					return _mainData;
-				}
-			}
+                    return _mainData;
+                }
+            }
 		}
 
 

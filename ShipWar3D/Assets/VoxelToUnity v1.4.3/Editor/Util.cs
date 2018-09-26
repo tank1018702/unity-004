@@ -14,13 +14,17 @@
 
 
 
-		public static string Load (string _path) {
-			try {
+		public static string Load (string _path)
+        {
+			try
+            {
 				StreamReader _sr = File.OpenText(_path);
 				string _data = _sr.ReadToEnd();
 				_sr.Close();
 				return _data;
-			} catch (System.Exception) {
+			}
+            catch (System.Exception)
+            {
 				return "";
 			}
 		}
@@ -41,16 +45,22 @@
 
 
 
-		public static byte[] FileToByte (string path) {
-			if (File.Exists(path)) {
+		public static byte[] FileToByte (string path)
+        {
+			if (File.Exists(path))
+            {
 				byte[] bytes = null;
-				try {
+				try
+                {
 					bytes = File.ReadAllBytes(path);
-				} catch {
+				} catch
+                {
 					return null;
 				}
 				return bytes;
-			} else {
+			}
+            else
+            {
 				return null;
 			}
 		}
@@ -73,7 +83,8 @@
 
 
 
-		public static void CreateFolder (string _path) {
+		public static void CreateFolder (string _path)
+        {
 			_path = GetFullPath(_path);
 			if (Directory.Exists(_path))
 				return;
@@ -362,7 +373,8 @@
 				}
 
 				// Fail to Add
-				if (!success) {
+				if (!success)
+                {
 
 					// New shelf
 					Shelf s = new Shelf() {
@@ -383,7 +395,8 @@
 					items[i] = item;
 
 					// Error, this shouldn't be happen...
-					if (!success) {
+					if (!success)
+                    {
 						Debug.LogWarning("[Voxel To Unity] Failed to pack textures, use Unity default packing algorithm instead. Please contact the programmer to report the bug: QQ 1182032752, Email moenenn@163.com");
 						texture = new Texture2D(1, 1);
 						Rect[] _uvs = texture.PackTextures(textures.ToArray(), 0);

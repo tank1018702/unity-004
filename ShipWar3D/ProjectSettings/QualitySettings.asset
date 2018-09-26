@@ -196,7 +196,7 @@ QualitySettings:
     softVegetation: 1
     realtimeReflectionProbes: 1
     billboardsFaceCameraPosition: 1
-    vSyncCount: 1
+    vSyncCount: 0
     lodBias: 2
     maximumLODLevel: 0
     streamingMipmapsActive: 0
@@ -210,4 +210,5 @@ QualitySettings:
     asyncUploadBufferSize: 4
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
-  m_PerPlatformDefaultQuality: {}
+  m_PerPlatformDefaultQuality:
+    Standalone: 0

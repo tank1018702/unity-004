@@ -230,7 +230,7 @@
 		private int MaxFacesInOneMesh = 16200;
 
 
-		public void CreateVoxelMesh (
+		public void CreateVoxelMesh(
 			VoxData voxelData, int frame, float scale, Vector3 pivot, bool lightMapSupport,
 			ref Mesh[] meshs, ref Texture2D texture
 		) {

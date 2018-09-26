@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class weapons : MonoBehaviour
 {
-
+    [SerializeField]
+    bool hasAnim = true;
 
     [SerializeField]
     private Transform model;
@@ -25,48 +26,106 @@ public class weapons : MonoBehaviour
     [SerializeField]
     private ParticleSystem[] Particles=new ParticleSystem[0];
 
+    public Transform muzzle;
+
+    bool controllerIsPlayer = false;
+
+    [SerializeField]
+    TurretsContorl turrets;
+
+    [SerializeField]
+    GameObject bullet;
 
 
-    public bool CanShoot
+    public float  speed;
+
+    public float lifeTime;
+
+    public int damage;
+
+
+
+
+    
+
+
+
+    public bool ReadyToShoot
     {
         get
         {
-            return PrevFireTime + FireFrequency < Time.time ? true : false;
+            if (controllerIsPlayer)
+            {
+                return PrevFireTime + FireFrequency < Time.time;
+            }
+            else
+            {
+                return (PrevFireTime + FireFrequency < Time.time) && turrets.inShootArea;
+            }
         }
 
     }
 
+
+
     void Start()
     {
-      
+        Transform root = GetRoot(transform);
+        
+        if (root.tag== "Player")
+        {      
+            controllerIsPlayer = true;   
+        }
+        if(!turrets)
+        {
+            turrets = transform.GetComponentInParent<TurretsContorl>();
+        }
+        if(!muzzle)
+        {
+            muzzle = transform.Find("Muzzle").transform;
+        }
+       
+
+    }
+
+    Transform GetRoot(Transform t)
+    {
+        if(t.parent==null)
+        {
+            return t;
+        }
+        else
+        {
+            return GetRoot(t.parent);
+        }
     }
 
     void Update()
     {
-        KeyUpdate();
-        PositionUpdate();
+        if (hasAnim)
+            AnimUpdate();
     }
 
 
-    void Fire()
+    void Shoot()
     {
-        Debug.Log("开火");
+        Instantiate(bullet).GetComponent<Projectile>().Init(muzzle.position, muzzle.forward, speed, lifeTime, damage, gameObject.layer);
+        
     }
-    
-    void KeyUpdate()
+
+    public void Fire()
     {
-        if(Input.GetKey(KeyCode.Mouse0))
+
+        if (ReadyToShoot)
         {
-            if(CanShoot)
-            {
-                Fire();
-                PlayAllParticles();
-                PrevFireTime = Time.time;
-            }
+            Shoot();
+            PlayAllParticles();
+            PrevFireTime = Time.time;
         }
+
     }
 
-    void PositionUpdate()
+    void AnimUpdate()
     {
         float t = Time.time - PrevFireTime;
         model.localPosition = Vector3.forward * LerpCurve.Evaluate(t);
@@ -90,7 +149,11 @@ public class weapons : MonoBehaviour
 
         ParticleSystem[] p = GetComponentsInChildren<ParticleSystem>(true);
         Particles = p;
+
+        muzzle = transform.Find("Muzzle").transform;
+        turrets = transform.GetComponentInParent<TurretsContorl>();
     }
 
 #endif
+
 }
