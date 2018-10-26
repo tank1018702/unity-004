@@ -25,17 +25,17 @@ public class TorpedoTube : Emitter
     }
 
     protected override void Shoot()
-    {
-       
+    { 
         RaycastHit hit;
         GetDirections(SpreadAngle, TotalNumber);
-        if (Physics.Raycast(muzzle.position, -Vector3.up, out hit, 10f/*, 1 << LayerMask.NameToLayer("Water")*/))
-        {
-            
+        int layerMask =1<< LayerMask.NameToLayer("Water");
+        
+        if (Physics.Raycast(muzzle.position, -Vector3.up, out hit, 10f, ~layerMask))
+        {    
             for(int i=0;i<Directions.Length;i++)
             {
-                Instantiate(projectile).GetComponent<Projectile>().Init(new Vector3(hit.point.x,hit.point.y-0.55f,hit.point.z), Directions[i], speed, lifeTime, damage, gameObject.layer);
-            }    
+                Instantiate(projectile).GetComponent<Projectile>().Init(new Vector3(hit.point.x,hit.point.y-0.55f,hit.point.z), Directions[i], speed, lifeTime, damage,this.gameObject);
+            }          
         }
         else
         {
@@ -46,11 +46,11 @@ public class TorpedoTube : Emitter
 
     void GetDirections(float spreadAngle, int num)
     {
-        Vector3 reference = Quaternion.AngleAxis(-spreadAngle / 2, Vector3.up) * new Vector3(muzzle.forward.x, 0, muzzle.forward.z);
+        Vector3 baseDir = Quaternion.AngleAxis(-spreadAngle / 2, Vector3.up) * new Vector3(muzzle.forward.x, 0, muzzle.forward.z);
         float eachAngle = spreadAngle / num;
         for (int i = 0; i < TotalNumber; i++)
         {
-            Directions[i] = Quaternion.AngleAxis(i * eachAngle, Vector3.up) * reference;
+            Directions[i] = Quaternion.AngleAxis(i * eachAngle, Vector3.up) * baseDir;
         }
     }
 }

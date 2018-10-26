@@ -47,7 +47,7 @@ public class Move : MonoBehaviour
     //move
     Vector3 PrevPosition;
 
-    Vector3 CurVeloticy;
+    public Vector3 CurVeloticy;
 
     Vector3 TargetVeloticy;
 
@@ -73,6 +73,7 @@ public class Move : MonoBehaviour
 
     public bool turnRight = false;
 
+    public bool Dead = false;
 
 
     void Start()
@@ -106,6 +107,11 @@ public class Move : MonoBehaviour
 
     void MovementUpdate()
     {
+        if(Dead)
+        {
+            rig.velocity = Vector3.zero;
+            return;
+        }
         rig.velocity = Quaternion.AngleAxis(ActualTurnAmount, transform.up) * ActualVeloticy;
 
 

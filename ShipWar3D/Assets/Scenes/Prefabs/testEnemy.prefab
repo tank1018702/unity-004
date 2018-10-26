@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4492501006668112}
   - component: {fileID: 198902628960878174}
   - component: {fileID: 199259814510676726}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: _p
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4084574037775574}
   - component: {fileID: 114404058029809326}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Artillery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 4788667530794490}
   - component: {fileID: 198110568208613372}
   - component: {fileID: 199655756197062050}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4971055425229126}
   - component: {fileID: 114148934516458366}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Artillery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4243709264665570}
   - component: {fileID: 114415749807774942}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 4145974432369880}
   - component: {fileID: 198531194564266268}
   - component: {fileID: 199463873023379886}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: _p
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 4132019364458252}
   - component: {fileID: 198827210790790234}
   - component: {fileID: 199688265899921514}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: RightTail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 4487124858528866}
   - component: {fileID: 33213866171617418}
   - component: {fileID: 23910113691799926}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4275122172133792}
   - component: {fileID: 114925082465814554}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 4222744435586342}
   - component: {fileID: 198027939801506606}
   - component: {fileID: 199242782051355460}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: _p
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 4373686696825744}
   - component: {fileID: 198465130991981330}
   - component: {fileID: 199585566586703960}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: _p
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4552500996628174}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: ShipWake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,8 +252,8 @@ GameObject:
   - component: {fileID: 4196787619876012}
   - component: {fileID: 198861742788521620}
   - component: {fileID: 199049049727988182}
-  m_Layer: 10
-  m_Name: RightTail (1)
+  m_Layer: 11
+  m_Name: LeftTail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,7 +267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4401253296164312}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,7 +312,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4383787485027544}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 4067091334788194}
   - component: {fileID: 33841400789984992}
   - component: {fileID: 23979328649661036}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 4341189837707554}
   - component: {fileID: 33357271120815194}
   - component: {fileID: 23581912694701288}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -363,7 +363,7 @@ GameObject:
   - component: {fileID: 4909417406622296}
   - component: {fileID: 33824746555804636}
   - component: {fileID: 23427083810196394}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -423,7 +423,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1365706016544770}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4552500996628174}
@@ -463,7 +463,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1585577547567206}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Children: []
   m_Father: {fileID: 4552500996628174}
@@ -489,7 +489,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1251718001053626}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 92.7, y: 0, z: 0}
+  m_LocalPosition: {x: 48.7, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4585303380046222}
@@ -927,7 +927,7 @@ Rigidbody:
   m_GameObject: {fileID: 1251718001053626}
   serializedVersion: 2
   m_Mass: 100
-  m_Drag: 10
+  m_Drag: 0
   m_AngularDrag: 100
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -1002,7 +1002,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   ShipMass: 80
   ShipLength: 20
-  maxRotateVelotocy: 2
+  CurVeloticy: {x: 0, y: 0, z: 0}
+  maxRotateVelotocy: 10
   speedUp: 0
   turnLeft: 0
   turnRight: 0
@@ -1040,7 +1041,7 @@ MonoBehaviour:
   muzzle: {fileID: 4383787485027544}
   turrets: {fileID: 114148934516458366}
   projectile: {fileID: 1381236507489898, guid: 58b08b7320560a04a95fb607fe42ea64, type: 2}
-  speed: 80
+  speed: 150
   lifeTime: 5
   damage: 5
   model: {fileID: 4909417406622296}
@@ -1079,9 +1080,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942b568501deb1c4c91067c86e2015b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radiusForSearchTarget: 86.07
+  radiusForSearchTarget: 50
   stopDistence: 20
-  stopDegrees: 20
+  stopDegrees: 5
 --- !u!114 &114925082465814554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1100,7 +1101,7 @@ MonoBehaviour:
   muzzle: {fileID: 4401253296164312}
   turrets: {fileID: 114404058029809326}
   projectile: {fileID: 1381236507489898, guid: 58b08b7320560a04a95fb607fe42ea64, type: 2}
-  speed: 80
+  speed: 150
   lifeTime: 5
   damage: 5
   model: {fileID: 4487124858528866}

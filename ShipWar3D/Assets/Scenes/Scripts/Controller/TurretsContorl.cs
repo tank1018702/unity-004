@@ -9,21 +9,27 @@ public class TurretsContorl : MonoBehaviour
 
     public int RotateSpeed=180;
 
-    public Vector3  targetPos;
+    //public GameObject target;
+
+    public Vector3 targetPos;
 
     public float deviationAngle;
 
-    float currentAngle=0;
+    float currentAngle=359f;
 
-    [SerializeField]
-    Emitter[] m_weapons;
+    float fireAngle = 0;
+    
+    public  Emitter[] m_weapons;
 
+
+    bool CanRotate2Target = false;
 
     public bool inShootArea
     {
         get
         {
-            return currentAngle < deviationAngle;
+            
+            return currentAngle < deviationAngle&&CanRotate2Target;
         }
     }
 
@@ -46,9 +52,6 @@ public class TurretsContorl : MonoBehaviour
         for (int i = 0; i < m_weapons.Length; i++)
         {   
             m_weapons[i].Fire();
-
-
-
         }
     }
 
@@ -57,7 +60,7 @@ public class TurretsContorl : MonoBehaviour
         
         Vector3 aixs;
         float angle;
-
+        //------------------------------------------------------------------------
         Vector3 limit_dir = GetMouseDir_limit(LimitAngle,targetPos);
 
         //目标向量与基准Z轴正方向的左右关系
@@ -69,7 +72,14 @@ public class TurretsContorl : MonoBehaviour
 
         angle = Vector3.Angle(transform.forward, limit_dir);
 
-        currentAngle = angle;
+        Debug.DrawRay(transform.position, transform.forward*10f,Color.green);
+        Debug.DrawRay(transform.position, limit_dir*10f,Color.blue);
+        //Debug.Log(transform.name + ":" + angle);
+        if(targetPos!=Vector3.zero)
+        {
+            currentAngle = angle;
+        }
+        
 
         aixs = cur_is_right ? transform.up : -transform.up;
 
@@ -88,8 +98,14 @@ public class TurretsContorl : MonoBehaviour
                
             }  
         }
-      
+        if (Mathf.Abs(transform.localRotation.x - 0) > 0.1f || (Mathf.Abs(transform.localRotation.z - 0) > 0.1f))
+        {
+            transform.localRotation = Quaternion.Euler(0, transform.localRotation.y, 0);
+        }
+
+
         transform.Rotate(aixs, Mathf.Min(RotateSpeed * Time.deltaTime, angle));
+        
     }
 
     Vector3 GetMouseDir_limit(float limit_angle,Vector3 mousePos)
@@ -109,15 +125,17 @@ public class TurretsContorl : MonoBehaviour
 
                 //Debug.DrawRay(transform.position, q * transform.parent.forward*5, Color.red, 0.5f);
 
-               
 
+                Debug.DrawRay(transform.position + Vector3.up, q * transform.parent.forward, Color.cyan);
+                CanRotate2Target = false;
                 return q * transform.parent.forward;
             }
             else
             {
                 //Debug.DrawRay(transform.position, (hitpos - transform.position).normalized * 5, Color.yellow, 0.5f);
 
-                
+                Debug.DrawRay(transform.position + Vector3.up, (hitpos - transform.position).normalized, Color.white);
+                CanRotate2Target = true;
                 return (hitpos - transform.position).normalized;
 
                 
@@ -125,7 +143,8 @@ public class TurretsContorl : MonoBehaviour
         }
         else
         {
-            
+            Debug.DrawRay(transform.position + Vector3.up, transform.parent.forward, Color.black);
+            CanRotate2Target = false;
             return transform.parent.forward;
         }
 

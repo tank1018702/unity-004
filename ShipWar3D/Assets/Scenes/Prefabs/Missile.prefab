@@ -112,7 +112,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1917061765586912}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -66.77887, y: -0.5, z: -2.41}
+  m_LocalPosition: {x: -6.6291733, y: -0.294, z: 0.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4167514115173816}
@@ -293,12 +293,31 @@ MonoBehaviour:
   speed: 0
   distance: 0
   damage: 0
-  hitTarget: {fileID: 0}
-  hitSeaSurface: {fileID: 0}
+  radius: 0.15
+  hitTarget: {fileID: 198342832598819636, guid: 64048919bb5208a41bd1aa5a471f5dcd,
+    type: 2}
+  hitWater: {fileID: 198220023563622394, guid: 773bbd321a8543b42b16b7d63f90badc, type: 2}
+  hitGround: {fileID: 0}
   disappear: {fileID: 0}
+  hitable:
+    serializedVersion: 2
+    m_Bits: 12288
+  player:
+    serializedVersion: 2
+    m_Bits: 1024
+  enemy:
+    serializedVersion: 2
+    m_Bits: 2048
+  ground:
+    serializedVersion: 2
+    m_Bits: 4096
+  water:
+    serializedVersion: 2
+    m_Bits: 8192
   target: {fileID: 0}
   rotateSpeed: 4
   Acceleration: 80
+  lead: 0.5
 --- !u!198 &198444066670635070
 ParticleSystem:
   m_ObjectHideFlags: 1

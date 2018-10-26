@@ -43,13 +43,6 @@ public class weapons : MonoBehaviour
 
     public int damage;
 
-
-
-
-    
-
-
-
     public bool ReadyToShoot
     {
         get
@@ -66,8 +59,6 @@ public class weapons : MonoBehaviour
 
     }
 
-
-
     void Start()
     {
         Transform root = GetRoot(transform);
@@ -83,8 +74,7 @@ public class weapons : MonoBehaviour
         if(!muzzle)
         {
             muzzle = transform.Find("Muzzle").transform;
-        }
-       
+        }   
 
     }
 
@@ -109,7 +99,7 @@ public class weapons : MonoBehaviour
 
     void Shoot()
     {
-        Instantiate(bullet).GetComponent<Projectile>().Init(muzzle.position, muzzle.forward, speed, lifeTime, damage, gameObject.layer);
+        Instantiate(bullet).GetComponent<Projectile>().Init(muzzle.position, muzzle.forward, speed, lifeTime, damage,this.gameObject);
         
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MissileLauncher : Emitter
 {
-    public Transform target;
+    
 
     public int TotalMissileNumber;
 
@@ -43,14 +43,15 @@ public class MissileLauncher : Emitter
     protected override void Update()
     {
         LoadingTimeUpdate();
-
-
+        
     }
 
     protected override void Shoot()
     {     
-        Vector3 randomForward = new Vector3(muzzle.forward.x, Random.Range(muzzle.forward.y - 0.1f, muzzle.forward.y + 0.1f), muzzle.forward.z);
-        Instantiate(projectile).GetComponent<Missile>().Init(muzzle.position, randomForward, speed, lifeTime, damage, gameObject.layer, target);
+        //发射角太低了容易射到水里..
+        //更正,是目标坐标位置默认在船底,在Y轴给一个偏移量就行
+        Vector3 randomForward = new Vector3(muzzle.forward.x, Random.Range(muzzle.forward.y +0.5f, muzzle.forward.y + 0.8f), muzzle.forward.z);
+        Instantiate(projectile).GetComponent<Missile>().Init(muzzle.position, randomForward, speed, lifeTime, damage,this.gameObject, target);
     }
 
     void LoadingTimeUpdate()

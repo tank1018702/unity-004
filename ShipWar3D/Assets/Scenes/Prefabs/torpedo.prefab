@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4311038244456400}
   - component: {fileID: 114093770586766810}
   m_Layer: 0
-  m_Name: torpedo.
+  m_Name: torpedo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -189,9 +189,27 @@ MonoBehaviour:
   speed: 0
   distance: 0
   damage: 0
-  hitTarget: {fileID: 0}
-  hitSeaSurface: {fileID: 0}
+  radius: 0.15
+  hitTarget: {fileID: 198467365942516606, guid: 3b90a27bcabbb6644a4d7d41a065215a,
+    type: 2}
+  hitWater: {fileID: 0}
+  hitGround: {fileID: 0}
   disappear: {fileID: 0}
+  hitable:
+    serializedVersion: 2
+    m_Bits: 4096
+  player:
+    serializedVersion: 2
+    m_Bits: 1024
+  enemy:
+    serializedVersion: 2
+    m_Bits: 2048
+  ground:
+    serializedVersion: 2
+    m_Bits: 4096
+  water:
+    serializedVersion: 2
+    m_Bits: 8192
   velocityDecay: 1
 --- !u!198 &198141628374266084
 ParticleSystem:

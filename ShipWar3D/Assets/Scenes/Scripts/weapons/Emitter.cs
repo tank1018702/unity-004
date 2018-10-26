@@ -9,6 +9,8 @@ public class Emitter : MonoBehaviour
 
     protected float PrevFireTime = float.MinValue;
 
+    [SerializeField]
+    public Transform target;
 
     [SerializeField]
     protected ParticleSystem[] Particles = new ParticleSystem[0];

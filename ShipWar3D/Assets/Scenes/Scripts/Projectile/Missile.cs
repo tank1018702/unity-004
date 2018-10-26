@@ -12,7 +12,8 @@ public class Missile : Projectile
     [SerializeField]
     float Acceleration = 1000;
 
-
+    [SerializeField]
+    float lead = 0.5f;
     protected override void Start()
     {
         base.Start();
@@ -29,17 +30,24 @@ public class Missile : Projectile
         transform.forward = direction;
     }
 
-    protected override Vector3 MoveDirection(Vector3 direction)
+    protected override void MoveLogicUpdate()
     {
-        if(target)
+        if (target)
         {
-            Vector3 tarDirection = (target.transform.position - transform.position).normalized;
-            return Vector3.MoveTowards(transform.forward, tarDirection, rotateSpeed * Time.fixedDeltaTime);
+            Vector3 offsetPos = new Vector3(target.transform.position.x, target.transform.position.y + 1f, target.transform.position.z);
+            Vector3 tarDirection = (offsetPos - transform.position).normalized;
+            //提前量
+            //Vector3 leadPos = target.transform.position + target.transform.GetComponent<Move>().CurVeloticy.normalized;
+            direction = Vector3.MoveTowards(transform.forward, tarDirection, rotateSpeed * Time.fixedDeltaTime).normalized;
         }
-        return direction;
+
+        speed += Acceleration * Time.fixedDeltaTime;
+        distance = speed * Time.fixedDeltaTime;
+        transform.position += direction * distance;
     }
 
-    public virtual void Init(Vector3 _position, Vector3 _direction, float _speed, float _lifetime, int _damage, LayerMask _shooterLayer,Transform target)
+
+    public void Init(Vector3 _position, Vector3 _direction, float _speed, float _lifetime, int _damage, GameObject shooter,  Transform target)
     {
         transform.position = _position;
         direction = _direction;
@@ -47,13 +55,13 @@ public class Missile : Projectile
         speed = _speed;
         lifeTime = _lifetime;
         damage = _damage;
-        shooterLayer = _shooterLayer;
+        this.shooter = shooter;
         this.target = target;
-    }
-
-    protected override float SpeedUpdate(float speed)
-    {
-        return speed + Acceleration * Time.fixedDeltaTime;
+        //
+        //hitable = hitable | player | enemy & (~1 << shooter.layer);
+        hitable = hitable | player | enemy;
+        //Debug.Log(Convert.ToString(hitable, 2));
+        hitable = hitable & (~(1 << shooter.layer));
     }
 
    

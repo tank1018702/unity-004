@@ -18,8 +18,8 @@ TagManager:
   - GroundCollider
   - Player
   - Enemy
-  - HitAble
-  - Water
+  - Ground
+  - Sea
   - 
   - 
   - 

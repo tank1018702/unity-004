@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
+
+
 
 public class Projectile : MonoBehaviour
 {
@@ -14,22 +17,38 @@ public class Projectile : MonoBehaviour
     protected float distance;
     [SerializeField]
     protected int damage;
+    [SerializeField]
+    float radius=0.15f;
 
     RaycastHit[] hit;
 
     public ParticleSystem hitTarget;
-    public ParticleSystem hitSeaSurface;
+    public ParticleSystem hitWater;
+    public ParticleSystem hitGround;
     public ParticleSystem disappear;
 
-    //先放着
-    protected LayerMask hitAbleLayer;
-    protected LayerMask groundLayer;
-    protected LayerMask shooterLayer;
-    protected LayerMask tempLayer;
+    protected GameObject shooter;
+
+   
+    [SerializeField]
+    protected LayerMask hitable;
+    protected LayerMask templayer;
+
+    [SerializeField]
+    protected LayerMask player;
+    [SerializeField]
+    protected LayerMask enemy;
+    [SerializeField]
+    protected LayerMask ground;
+    [SerializeField]
+    protected LayerMask water;
+
+    
+
 
     protected virtual void Start()
     {
-
+        hit = new RaycastHit[1];    
     }
 
     protected virtual void FixedUpdate()
@@ -49,40 +68,49 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
             //Invoke("Destroy(gameObject)",disappear.time);
         }
-        speed = SpeedUpdate(speed);
-        distance = speed * Time.fixedDeltaTime;
-        if (Physics.SphereCastNonAlloc(transform.position, 0.15f, direction, hit, distance, hitAbleLayer) > 0)
+        MoveLogicUpdate();
+        
+        //Debug.DrawRay(transform.position, direction * distance, Color.red, Time.deltaTime);
+        HitUpdate();     
+        
+    }
+
+
+    protected virtual void HitUpdate()
+    {
+        if (Physics.SphereCastNonAlloc(transform.position, radius, direction.normalized, hit, distance, hitable) > 0)
         {
-            tempLayer = hit[0].collider.gameObject.layer;
-            distance = hit[0].distance;
-            if (((1 << tempLayer) & shooterLayer) == 0)
-            {
-                //PlayParticleAtPoint(hitTarget, hit[0].point, hit[0].normal);
-                hit[0].collider.GetComponent<Ship>().BeHit(damage);
+            
+            templayer = hit[0].collider.gameObject.layer;
+            distance = hit[0].distance;  
+            if (((1 << templayer) & (player | enemy)) != 0)
+            {    
+                if(hitTarget)
+                PlayParticleAtPoint(Instantiate(hitTarget), hit[0].point, hit[0].normal);
+                hit[0].collider.GetComponentInParent<Ship>().BeHit(damage);
             }
-            else if (((1 << tempLayer) & groundLayer) != 0)
+            else if (((1 << templayer) & ground) != 0)
             {
 
-
+            }
+            else if (((1 << templayer) & water) != 0)
+            {          
+                if (hitWater)
+                    PlayParticleAtSurface(Instantiate(hitWater), hit[0].point);      
             }
             Destroy(gameObject);
         }
-        direction = MoveDirection(direction);
-        transform.position += direction * distance;
     }
 
-    protected virtual float SpeedUpdate(float speed)
+    protected virtual void MoveLogicUpdate()
     {
-        return speed;
+        
     }
-    protected virtual Vector3 MoveDirection(Vector3 direction)
-    {
-        return direction;
-    }
+
 
 
     //初始发射物的属性
-    public virtual void Init(Vector3 _position, Vector3 _direction, float _speed, float _lifetime, int _damage, LayerMask _shooterLayer)
+    public virtual void Init(Vector3 _position, Vector3 _direction, float _speed, float _lifetime, int _damage, GameObject shooter)
     {
         transform.position = _position;
         direction = _direction;
@@ -90,12 +118,34 @@ public class Projectile : MonoBehaviour
         speed = _speed;
         lifeTime = _lifetime;
         damage = _damage;
-        shooterLayer = _shooterLayer;
+        this.shooter = shooter;
+        //还是放这里
+        //过滤掉自身的层级
+        hitable = hitable | player | enemy;
+        //Debug.Log(Convert.ToString(hitable, 2));
+        hitable = hitable &(~(1 << shooter.layer));
+        //Debug.Log(Convert.ToString(1 << shooter.layer, 2));
+        //Debug.Log(Convert.ToString(hitable, 2));
+        //Debug.Log(Convert.ToString(hitable, 2)+":"+Convert.ToString(1<<shooter.layer, 2)+":"+ Convert.ToString(hitable&~1<<shooter.layer, 2));
+
     }
-    void PlayParticleAtPoint(ParticleSystem pc, Vector3 point, Vector3 direction)
+    protected virtual void PlayParticleAtPoint(ParticleSystem pc, Vector3 point, Vector3 direction)
     {
         pc.transform.position = point;
         pc.transform.rotation = Quaternion.LookRotation(direction);
         pc.Play();
+    }
+
+    protected virtual void PlayParticleAtSurface(ParticleSystem pc,Vector3 point)
+    {
+        pc.transform.position = new Vector3(point.x, 0, point.z);
+        pc.transform.rotation = Quaternion.identity;
+        pc.Play();
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position, radius);
     }
 }

@@ -109,8 +109,10 @@
     <Compile Include="Assets\Scenes\Scripts\Controller\AIController.cs" />
     <Compile Include="Assets\Scenes\Scripts\Controller\CameraContorl.cs" />
     <Compile Include="Assets\Scenes\Scripts\Controller\CharacherController.cs" />
+    <Compile Include="Assets\Scenes\Scripts\Controller\ShipController.cs" />
     <Compile Include="Assets\Scenes\Scripts\Controller\TurretsContorl.cs" />
     <Compile Include="Assets\Scenes\Scripts\Manager\GameManager.cs" />
+    <Compile Include="Assets\Scenes\Scripts\Manager\ParticleManager.cs" />
     <Compile Include="Assets\Scenes\Scripts\ParticleTest.cs" />
     <Compile Include="Assets\Scenes\Scripts\Projectile\Bullet.cs" />
     <Compile Include="Assets\Scenes\Scripts\Projectile\Missile.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="Assets\Scenes\Scripts\Projectile\Torpedo.cs" />
     <Compile Include="Assets\Scenes\Scripts\Ship\Move.cs" />
     <Compile Include="Assets\Scenes\Scripts\Ship\Ship.cs" />
+    <Compile Include="Assets\Scenes\Scripts\Test1.cs" />
     <Compile Include="Assets\Scenes\Scripts\weapons.cs" />
     <Compile Include="Assets\Scenes\Scripts\weapons\Artillery.cs" />
     <Compile Include="Assets\Scenes\Scripts\weapons\Emitter.cs" />
@@ -140,14 +143,17 @@
     <None Include="Assets\PostProcessing\Resources\Shaders\Blit.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\WaveformRender.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\VectorscopeCompute.compute" />
+    <None Include="Assets\Scenes\Materials\Shader\WaterInclude.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\FXAA3.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\MotionBlur.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\AmbientOcclusion.shader" />
     <None Include="Assets\PostProcessing\Resources\Bluenoise64\LICENSE.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\BuiltinDebugViews.shader" />
+    <None Include="Assets\Scenes\Materials\Shader\FX-Water4.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Common.cginc" />
     <None Include="Assets\PostProcessing\Resources\Bluenoise64\COPYING.txt" />
     <None Include="Assets\PostProcessing\Editor Resources\UI\Trackball.shader" />
+    <None Include="Assets\Scenes\Materials\Shader\FX-SimpleWater4.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Bloom.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\TAA.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\EyeHistogram.compute" />
